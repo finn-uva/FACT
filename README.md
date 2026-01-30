@@ -27,8 +27,8 @@ conda env create --name fact_ai --file=fairgnn_wod.yml
     ├── graphvae.py
     ├── main.py
     ├── metrics.py
-    ├── train.py
-    └── results.ipynb
+    ├── results.ipynb
+    └── train.py
   ```
 
 ## Reproducing the experiments
