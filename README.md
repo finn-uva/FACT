@@ -14,7 +14,10 @@ conda env create --name fact_ai --file=fairgnn_wod.yml
 
   ```
     .
+    ├── credit
     ├── fairgnn_model
+    ├── pokec_n
+    ├── pokec_z
     ├── vae_model
     ├── README.md
     ├── data.py
@@ -65,17 +68,11 @@ python main.py --seed=67 --dataset='Pokec_z' --feature_path='./pokec_z/' --edges
 ```
 
 
-## Sources:
-The code used to reproduce the results of NIFA comes from the following repository [https://github.com/CGCL-codes/NIFA](https://github.com/CGCL-codes/NIFA). This repository is licensed under CC BY-NC-ND 4.0. However, the authors have explicitly granted us permission to modify and extend the code for our research purposes.
-
-As the NIFA repository does not contain code for reproducing all results, we added code from the repositories below. More information about the code and their licenses can be viewed in the respective repositories.
-
-FA-GNN: [https://github.com/mengcao327/attack-gnn-fairness](https://github.com/mengcao327/attack-gnn-fairness)
+## Additional resources:
+In order to reproduce the results of the original paper, we applied some snippets of code from the repositories below for the functionalities of a few parts of the framework.
 
 FairGNN: [https://github.com/EnyanDai/FairGNN](https://github.com/EnyanDai/FairGNN)
 
-Fairsin: [https://github.com/BUPT-GAMMA/FairSIN](https://github.com/BUPT-GAMMA/FairSIN)
+THEMIS: [https://github.com/LavinWong/Themis](https://github.com/LavinWong/Themis)
 
-Fairvgnn: [https://github.com/yuwvandy/FairVGNN](https://github.com/yuwvandy/FairVGNN)
-
-TDGIA: [https://github.com/THUDM/tdgia](https://github.com/THUDM/tdgia)
+pytorch ignite: [https://github.com/pytorch/ignite](https://github.com/pytorch/ignite)
