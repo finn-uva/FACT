@@ -14,18 +14,17 @@ conda env create --name fact_ai --file=__________.yml
 
   ```
     .
-    ├── code
-    ├── data
-    ├── FA-GNN
-    ├── FairGNN
-    ├── FairSIN
-    ├── FairVGNN
-    ├── TDGIA
-    ├── .gitignore
-    ├── analysis.ipynb
-    ├── env_FAGNN.yml
-    ├── env_nifa.yml
+    ├── fairgnn_model
+    ├── vae_model
     ├── README.md
+    ├── data.py
+    ├── evaluate.py
+    ├── fairgnn.py
+    ├── fairgnn_wod.yml
+    ├── graphvae.py
+    ├── main.py
+    ├── metrics.py
+    ├── train.py
     └── results.ipynb
   ```
 
