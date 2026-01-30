@@ -42,15 +42,28 @@ python evaluate.py --seed=67 --dataset='Credit' --feature_path='./credit/' --edg
      --gnn_path='./fairgnn_model/fairgnn_wod_model_Credit_67.pt'
 
 # Pokec_n test set results
-python -u evaluate.py  --seed=67 --dataset='Pokec_n' --feature_path='./pokec_n/' --edges_path='./pokec_n/' \
+python evaluate.py  --seed=67 --dataset='Pokec_n' --feature_path='./pokec_n/' --edges_path='./pokec_n/' \
      --vae_path='./vae_model/fair_graphvae_model_Pokec_n_42.pt' \
      --gnn_path='./fairgnn_model/fairgnn_wod_model_Pokec_n_42.pt'
 
 # Pokec_z test set results
-python -u evaluate.py --seed=67 --dataset='Pokec_z' --feature_path='./pokec_z/' --edges_path='./pokec_z/' \
+python evaluate.py --seed=67 --dataset='Pokec_z' --feature_path='./pokec_z/' --edges_path='./pokec_z/' \
      --vae_path='./vae_model/fair_graphvae_model_Pokec_z_67.pt' \
      --gnn_path='./fairgnn_model/fairgnn_wod_model_Pokec_z_67.pt'
 ```
+
+### The following lines were used to train the models
+```
+# Credit
+python main.py --seed=67 --dataset='Credit' --feature_path='./credit/' --edges_path='./credit/'
+
+# Pokec_n
+python main.py --seed=67 --dataset='Pokec_n' --feature_path='./pokec_n/' --edges_path='./pokec_n/'
+
+# Pokec_z
+python main.py --seed=67 --dataset='Pokec_z' --feature_path='./pokec_z/' --edges_path='./pokec_z/'
+```
+
 
 ## Sources:
 The code used to reproduce the results of NIFA comes from the following repository [https://github.com/CGCL-codes/NIFA](https://github.com/CGCL-codes/NIFA). This repository is licensed under CC BY-NC-ND 4.0. However, the authors have explicitly granted us permission to modify and extend the code for our research purposes.
