@@ -19,7 +19,7 @@ class AdaptiveAssigner(nn.Module):
         self.n_channels = n_channels
         self.activation = activation
 
-        # Have as static two-layer MLP for now
+        # Create two-layer MLP
         self.network = nn.Sequential(
             nn.Linear(2 * n_features, assigner_hidden_dims),  # [n_edges, 2 * n_features] -> [n_edges, assigner_hidden_dim]
             activation,
@@ -48,7 +48,7 @@ class Discriminator(nn.Module):
         self.n_classes = n_classes
         self.activation = activation
 
-        # Have as static two-layer network for now
+        # Create two-layer MLP
         self.network = nn.Sequential(
             nn.Linear(hidden_dim, discriminator_hidden_dims),  # [n_channels, n_nodes, hidden_dim] -> [n_channels, n_nodes, discriminator_hidden_dim]
             activation,
@@ -104,7 +104,7 @@ class NodeClassifier(nn.Module):
         self.n_classes = n_classes
         self.activation = activation
 
-        # Have as static two-layer network for now
+        # Create two-layer network
         self.network = nn.Sequential(
             nn.Linear(n_channels * hidden_dim, classifier_hidden_dims),  # [n_channels, n_nodes, hidden_dim] -> [n_channels, n_nodes, classifier_hidden_dim]
             activation,
@@ -199,8 +199,8 @@ class Fair_GNN_WOD(nn.Module):
         self.config = config
 
         # Placeholders for unknowns
-        n_demographics = 1  # Number of demographic classes. Keep binary for now
-        n_classes = 1  # Number of classes for final task. Keep binary for now
+        n_demographics = 1  # Number of demographic classes. Binary
+        n_classes = 1  # Number of classes for final task. Binary
 
         # Save hyperparameters
         self.n_features = config.n_features+1
