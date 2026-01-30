@@ -73,6 +73,6 @@ In order to reproduce the results of the original paper, we applied some snippet
 
 FairGNN: [https://github.com/EnyanDai/FairGNN](https://github.com/EnyanDai/FairGNN)
 
-THEMIS: [https://github.com/LavinWong/Themis](https://github.com/LavinWong/Themis)
+Themis: [https://github.com/LavinWong/Themis](https://github.com/LavinWong/Themis)
 
-pytorch ignite: [https://github.com/pytorch/ignite](https://github.com/pytorch/ignite)
+PyTorch-Ignite: [https://github.com/pytorch/ignite](https://github.com/pytorch/ignite)
