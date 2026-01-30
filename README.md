@@ -1,0 +1,159 @@
+# Reproducibility Study of “fairGNN-WOD: Fair Graph Learning Without Demographics”
+
+This repository presents a reproduction of [fairGNN-WOD: Fair Graph Learning Without Complete Demographics](https://www.ijcai.org/proceedings/2025/63). 
+
+## Requirements
+
+Run this command to install the requirements in a conda environment:
+
+```setup
+conda env create --name fact_ai --file=__________.yml
+```
+
+## File structure
+
+  ```
+    .
+    ├── code
+    ├── data
+    ├── FA-GNN
+    ├── FairGNN
+    ├── FairSIN
+    ├── FairVGNN
+    ├── TDGIA
+    ├── .gitignore
+    ├── analysis.ipynb
+    ├── env_FAGNN.yml
+    ├── env_nifa.yml
+    ├── README.md
+    └── results.ipynb
+  ```
+
+## Reproducing the experiments
+
+To compute the results you can either run the rusults.ipynb or manually run the commands stated below.
+
+### The following lines reproduce the evaluation of the four classic GNN models (Table 1.)
+Note: make sure you are in the code folder
+
+```
+python main.py --dataset pokec_z --alpha 0.01 --beta 4 --node 102 --edge 50 --before --device 0 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+
+python main.py --dataset pokec_n --alpha 0.01 --beta 4 --node 87 --edge 50 --before --device 1 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+
+python main.py --dataset dblp --alpha 0.1 --beta 8 --node 32 --edge 24 --epochs 500 --before --device 2 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+```
+
+### The following lines reproduce the evaluation of FairGNN (Table 1.)
+Note: make sure you are in the FairGNN folder
+
+```
+python train_fairGNN.py --seed=42 --model=GAT --sens_number=200  --num-hidden=128 --num_layers=2 --dataset=<DATASET> --alpha=4 --beta=0.01 --n_times=5 --dropout=0.5
+python train_fairGNN.py --seed=42 --model=GAT --sens_number=200 --num-hidden=128 --num_layers=2 --dataset=pokec_n --alpha=4 --beta=0.01 --n_times=5 --dropout=0.5 --poisoned
+
+python train_fairGNN.py --seed=42 --model=GAT --sens_number=200 --num-hidden=128 --num_layers=2 --dataset=pokec_z --alpha=4 --beta=0.01 --n_times=5 --dropout=0.5
+python train_fairGNN.py --seed=42 --model=GAT --sens_number=200 --num-hidden=128 --num_layers=2 --dataset=pokec_z --alpha=4 --beta=0.01 --n_times=5 --dropout=0.5 --poisoned
+
+python train_fairGNN.py --seed=42 --model=GAT --sens_number=200 --num-hidden=128 --num_layers=2 --dataset=dblp --acc=0.93 --alpha=4 --beta=0.01 --n_times=5 --dropout=0.5
+python train_fairGNN.py --seed=42 --model=GAT --sens_number=200 --num-hidden=128 --num_layers=2 --dataset=dblp --acc=0.93 --alpha=4 --beta=0.01 --n_times=5 --dropout=0.5 --poisoned
+
+```
+
+### The following lines reproduce the evaluation of FairVGNN (Table 1.)
+Note: make sure you are in the FairVGNN folder
+
+
+```
+python fairvgnn.py --dataset='pokec_z' --encoder='GCN' --runs=5 --alpha=0.5 --prop='spmm' --hidden=128
+python fairvgnn.py --dataset='pokec_z' --encoder='GCN' --runs=5 --alpha=0.5 --prop='spmm' --hidden=128 --poisoned
+
+python fairvgnn.py --dataset='pokec_n' --encoder='GCN' --runs=5 --alpha=0.5 --prop='spmm' --hidden=128
+python fairvgnn.py --dataset='pokec_n' --encoder='GCN' --runs=5 --alpha=0.5 --prop='spmm' --hidden=128 --poisoned
+
+python fairvgnn.py --dataset='dblp' --encoder='GCN' --runs=5 --alpha=0.5 --prop='spmm' --hidden=128
+python fairvgnn.py --dataset='dblp' --encoder='GCN' --runs=5 --alpha=0.5 --prop='spmm' --hidden=128 --poisoned
+```
+
+### The following lines reproduce the evaluation of FairSIN (Table 1.)
+Note: make sure you are in the FairSIN folder
+
+```
+python in-train.py --dataset='pokec_n' --encoder='GCN' --c_epochs=10 --runs=5 --hidden=128 --epoch=100 --c_lr=0.001 --e_lr=0.001 --d_lr=0.001 --delta=4 --d='yes'
+python in-train.py --dataset='pokec_n' --encoder='GCN' --c_epochs=10 --runs=5 --hidden=128 --epoch=100 --c_lr=0.001 --e_lr=0.001 --d_lr=0.001 --delta=4 --d='yes' --poisoned
+
+python in-train.py --dataset='pokec_z' --encoder='GCN' --c_epochs=10 --runs=5 --hidden=128 --epoch=100 --c_lr=0.001 --e_lr=0.001 --d_lr=0.001 --delta=4 --d='yes'
+python in-train.py --dataset='pokec_z' --encoder='GCN' --c_epochs=10 --runs=5 --hidden=128 --epoch=100 --c_lr=0.001 --e_lr=0.001 --d_lr=0.001 --delta=4 --d='yes' --poisoned
+
+python in-train.py --dataset='dblp' --encoder='GCN' --c_epochs=10 --runs=5 --hidden=128 --epoch=100 --c_lr=0.001 --e_lr=0.001 --d_lr=0.001 --delta=4 --d='yes'
+python in-train.py --dataset='dblp' --encoder='GCN' --c_epochs=10 --runs=5 --hidden=128 --epoch=100 --c_lr=0.001 --e_lr=0.001 --d_lr=0.001 --delta=4 --d='yes' --poisoned
+```
+
+### Use the following cells to pretrain GCN for further use with TDGIA (optional)
+Note: pretrained models are already provided
+
+```
+python main.py --dataset pokec_z --alpha 0.01 --beta 4 --node 102 --edge 50 --n_times 5 --before --device 0 --models 'GCN' --save_params True
+python main.py --dataset pokec_n --alpha 0.01 --beta 4 --node 87 --edge 50 --n_times 5 --before --device 0 --models 'GCN' --save_params True
+python main.py --dataset dblp --alpha 0.1 --beta 8 --node 32 --edge 24 --n_times 5 --epochs 500 --before --device 0 --models 'GCN' --save_params True
+```
+
+### Use the following cells to create new injected nodes and edges using the TDGIA baseline attack
+Note: make sure that you are in the TDGIA folder
+
+```
+python tdgia.py --dataset pokec_z --add_num 102 --max_connections 50 --models gcn_nifa
+python tdgia.py --dataset pokec_n --add_num 87 --max_connections 50 --models gcn_nifa
+python tdgia.py --dataset dblp --add_num 32 --max_connections 24 --models gcn_nifa
+```
+
+### The following cells reproduce the results from the TDGIA baseline attack (Table 2.)
+Note: make sure that you are in the code folder
+
+```
+python main.py --dataset pokec_z --alpha 0.01 --beta 4 --node 102 --edge 50 --n_times 5 --before --device 0 --models 'GCN' --tdgia True
+
+python main.py --dataset pokec_n --alpha 0.01 --beta 4 --node 87 --edge 50 --n_times 5 --before --device 0 --models 'GCN' --tdgia True
+
+python main.py --dataset dblp --alpha 0.1 --beta 8 --node 32 --edge 24 --n_times 5 --epochs 500 --before --device 0 --models 'GCN' --tdgia True
+
+```
+
+### The following cells reproduce the results from the FA-GNN baseline attack (Table 2.)
+Note: make sure that you are in the FA-GNN folder
+
+```
+python train.py --dataset pokec_z --model gcn --attack_type fair_attack --direction y1s1 --sensitive region --strategy DD --hidden 128 --sens_number 200
+
+python train.py --dataset pokec_n --model gcn --attack_type fair_attack --direction y1s1 --sensitive region --strategy DD --hidden 128 --sens_number 200
+
+python train.py --dataset dblp --model gcn --attack_type fair_attack --direction y1s1 --sensitive gender --strategy DD --hidden 128 --sens_number 1000
+ 
+```
+
+### The following cells output the results from the Multi-class Sensitive Attribute Dataset (Table 3.)
+Note: make sure that you are in the code folder
+
+```
+python main.py --pokec_age_bin --sensitive_attr_mode OvA --dataset pokec_z --alpha 0.01 --beta 4 --node 102 --edge 50 --n_times 5 --before --device 0 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+
+python main.py --pokec_age_bin --sensitive_attr_mode OvA --dataset pokec_n --alpha 0.01 --beta 4 --node 102 --edge 50 --n_times 5 --before --device 0 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+
+python main.py --pokec_age_bin --sensitive_attr_mode OvO --dataset pokec_z --alpha 0.01 --beta 4 --node 102 --edge 50 --n_times 5 --before --device 0 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+
+python main.py --pokec_age_bin --sensitive_attr_mode OvO --dataset pokec_n --alpha 0.01 --beta 4 --node 102 --edge 50 --n_times 5 --before --device 0 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+```
+
+## Sources:
+The code used to reproduce the results of NIFA comes from the following repository [https://github.com/CGCL-codes/NIFA](https://github.com/CGCL-codes/NIFA). This repository is licensed under CC BY-NC-ND 4.0. However, the authors have explicitly granted us permission to modify and extend the code for our research purposes.
+
+As the NIFA repository does not contain code for reproducing all results, we added code from the repositories below. More information about the code and their licenses can be viewed in the respective repositories.
+
+FA-GNN: [https://github.com/mengcao327/attack-gnn-fairness](https://github.com/mengcao327/attack-gnn-fairness)
+
+FairGNN: [https://github.com/EnyanDai/FairGNN](https://github.com/EnyanDai/FairGNN)
+
+Fairsin: [https://github.com/BUPT-GAMMA/FairSIN](https://github.com/BUPT-GAMMA/FairSIN)
+
+Fairvgnn: [https://github.com/yuwvandy/FairVGNN](https://github.com/yuwvandy/FairVGNN)
+
+TDGIA: [https://github.com/THUDM/tdgia](https://github.com/THUDM/tdgia)
