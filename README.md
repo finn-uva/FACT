@@ -36,11 +36,20 @@ To compute the evaluation results you can run the commands stated below for the 
 Note: make sure you are in the code folder
 
 ```
-python main.py --dataset pokec_z --alpha 0.01 --beta 4 --node 102 --edge 50 --before --device 0 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+# Results on credit test set
+python evaluate.py --seed=67 --dataset='Credit' --feature_path='./credit/' --edges_path='./credit/' \
+     --vae_path='./vae_model/fair_graphvae_model_Credit_67.pt' \
+     --gnn_path='./fairgnn_model/fairgnn_wod_model_Credit_67.pt'
 
-python main.py --dataset pokec_n --alpha 0.01 --beta 4 --node 87 --edge 50 --before --device 1 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+# Results on Pokec_n test set
+python -u evaluate.py  --seed=67 --dataset='Pokec_n' --feature_path='./pokec_n/' --edges_path='./pokec_n/' \
+     --vae_path='./vae_model/fair_graphvae_model_Pokec_n_42.pt' \
+     --gnn_path='./fairgnn_model/fairgnn_wod_model_Pokec_n_42.pt'
 
-python main.py --dataset dblp --alpha 0.1 --beta 8 --node 32 --edge 24 --epochs 500 --before --device 2 --models 'GCN' 'GraphSAGE' 'APPNP' 'SGC'
+# Results on Pokec_z test set
+python -u evaluate.py --seed=67 --dataset='Pokec_z' --feature_path='./pokec_z/' --edges_path='./pokec_z/' \
+     --vae_path='./vae_model/fair_graphvae_model_Pokec_z_67.pt' \
+     --gnn_path='./fairgnn_model/fairgnn_wod_model_Pokec_z_67.pt'
 ```
 
 ## Sources:
