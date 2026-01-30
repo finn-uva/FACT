@@ -7,7 +7,7 @@ This repository presents a reproduction of [fairGNN-WOD: Fair Graph Learning Wit
 Run this command to install the requirements in a conda environment:
 
 ```setup
-conda env create --name fact_ai --file=__________.yml
+conda env create --name fact_ai --file=fairgnn_wod.yml
 ```
 
 ## File structure
