@@ -46,8 +46,8 @@ python evaluate.py --seed=67 --dataset='Credit' --feature_path='./credit/' --edg
 
 # Pokec_n test set results
 python evaluate.py  --seed=67 --dataset='Pokec_n' --feature_path='./pokec_n/' --edges_path='./pokec_n/' \
-     --vae_path='./vae_model/fair_graphvae_model_Pokec_n_42.pt' \
-     --gnn_path='./fairgnn_model/fairgnn_wod_model_Pokec_n_42.pt'
+     --vae_path='./vae_model/fair_graphvae_model_Pokec_n_67.pt' \
+     --gnn_path='./fairgnn_model/fairgnn_wod_model_Pokec_n_67.pt'
 
 # Pokec_z test set results
 python evaluate.py --seed=67 --dataset='Pokec_z' --feature_path='./pokec_z/' --edges_path='./pokec_z/' \
