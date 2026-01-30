@@ -32,21 +32,21 @@ conda env create --name fact_ai --file=fairgnn_wod.yml
 
 To compute the evaluation results you can run the commands stated below for the different datasets.
 
-### The following lines reproduce the evaluation of the four classic GNN models (Table 1.)
+### The following lines reproduce the evaluation of our trained models
 Note: make sure you are in the code folder
 
 ```
-# Results on credit test set
+# Credit test set results
 python evaluate.py --seed=67 --dataset='Credit' --feature_path='./credit/' --edges_path='./credit/' \
      --vae_path='./vae_model/fair_graphvae_model_Credit_67.pt' \
      --gnn_path='./fairgnn_model/fairgnn_wod_model_Credit_67.pt'
 
-# Results on Pokec_n test set
+# Pokec_n test set results
 python -u evaluate.py  --seed=67 --dataset='Pokec_n' --feature_path='./pokec_n/' --edges_path='./pokec_n/' \
      --vae_path='./vae_model/fair_graphvae_model_Pokec_n_42.pt' \
      --gnn_path='./fairgnn_model/fairgnn_wod_model_Pokec_n_42.pt'
 
-# Results on Pokec_z test set
+# Pokec_z test set results
 python -u evaluate.py --seed=67 --dataset='Pokec_z' --feature_path='./pokec_z/' --edges_path='./pokec_z/' \
      --vae_path='./vae_model/fair_graphvae_model_Pokec_z_67.pt' \
      --gnn_path='./fairgnn_model/fairgnn_wod_model_Pokec_z_67.pt'
